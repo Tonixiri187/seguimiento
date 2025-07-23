@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Llum Requena - Gestión de Obras</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lexend', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .logo h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            font-weight: 700;
+        }
+
+        .logo-icon {
+            font-size: 2.5em;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.1em;
+            font-weight: 400;
+        }
+
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Lexend', sans-serif;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-tab:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-tab.active {
+            background: linear-gradient(45deg, #764ba2, #667eea);
+            transform: translateY(-2px);
+        }
+
+        .content {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            min-height: 500px;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #667eea;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e1e1e1;
+            border-radius: 10px;
+            font-family: 'Lexend', sans-serif;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: 'Lexend', sans-serif;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(45deg, #95a5a6, #7f8c8d);
+        }
+
+        .btn-danger {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+        }
+
+        .grid {
+            display: grid;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .grid-2 {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .obra-item, .presupuesto-item, .factura-item, .gasto-item, .foto-item, .pdf-item {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 4px solid #667eea;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .item-title {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .item-amount {
+            font-weight: 600;
+            color: #667eea;
+            font-size: 1.1em;
+        }
+
+        .item-date {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .photo-preview {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .photo-preview:hover {
+            transform: scale(1.05);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .modal img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 10px;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        .file-input-wrapper {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .file-input-wrapper:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .file-input-wrapper input[type=file] {
+            position: absolute;
+            left: -9999px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .header {
+                padding: 15px;
+            }
+
+            .logo h1 {
+                font-size: 2em;
+            }
+
+            .nav-tabs {
+                gap: 5px;
+            }
+
+            .nav-tab {
+                padding: 10px 16px;
+                font-size: 0.9em;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .stats {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+
+            .grid-2, .grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            font-weight: 500;
+        }
+
+        .alert-info {
+            background-color: #d1ecf1;
+            border-left: 4px solid #bee5eb;
+            color: #0c5460;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background-color: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <span class="logo-icon">⚡</span>
+                <h1>Llum Requena</h1>
+            </div>
+            <p class="subtitle">Gestión de Obras de Instalaciones Eléctricas</p>
+            
+            <div class="nav-tabs">
+                <button class="nav-tab active" onclick="showSection('dashboard')">Dashboard</button>
+                <button class="nav-tab" onclick="showSection('obras')">Obras</button>
+                <button class="nav-tab" onclick="showSection('presupuestos')">Presupuestos</button>
+                <button class="nav-tab" onclick="showSection('facturas')">Facturas</button>
+                <button class="nav-tab" onclick="showSection('gastos')">Gastos</button>
+                <button class="nav-tab" onclick="showSection('fotos')">Fotos</button>
+                <button class="nav-tab" onclick="showSection('archivos')">Archivos PDF</button>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- Dashboard -->
+            <div id="dashboard" class="section active">
+                <h2 style="margin-bottom: 20px; color: #333;">Panel de Control</h2>
+                
+                <div class="alert alert-info">
+                    <strong>Nota:</strong> Los datos se almacenan temporalmente. Para uso en producción, guarda este código en tu dispositivo donde tendrás almacenamiento persistente.
+                </div>
+
+                <div class="stats">
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalObras">0</div>
+                        <div class="stat-label">Obras Activas</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalPresupuesto">0€</div>
+                        <div class="stat-label">Presupuesto Total</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalFacturado">0€</div>
+                        <div class="stat-label">Total Facturado</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalGastos">0€</div>
+                        <div class="stat-label">Gastos Material</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 style="margin-bottom: 15px; color: #667eea;">Resumen de Obras Recientes</h3>
+                    <div id="obrasRecientes">
+                        <p style="color: #666;">No hay obras registradas</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Obras -->
+            <div id="obras" class="section">
+                <h2 style="margin-bottom: 20px; color: #333;">Gestión de Obras</h2>
+
+                <div class="card">
+                    <h3 style="margin-bottom: 15px; color: #667eea;">Nueva Obra</h3>
+                    <form id="obraForm">
+                        <div class="grid grid-2">
+                            <div class="form-group">
+                                <label>Nombre de la Obra</label>
+                                <input type="text" id="obraNombre" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Cliente</label>
+                                <input type="text" id="obraCliente" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Fecha de Inicio</label>
+                                <input type="date" id="obraFechaInicio" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Fecha Estimada de Finalización</label>
+                                <input type="date" id="obraFechaFin">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Descripción</label>
+                            <textarea id="obraDescripcion" placeholder="Descripción detallada de la obra..."></textarea>
+                        </div>
+                        <button type="submit" class="btn">Crear Obra</button>
+                    </form>
+                </div>
+
+                <div class="card">
+                    <h3 style="margin-bottom: 15px; color: #667eea;">Obras Registradas</h3>
+                    <div id="listaObras">
+                        <p style="color: #666;">No hay obras registradas</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Presupuestos -->
+            <div id="presupuestos" class="section">
+                <h2 style="margin-bottom: 20px; color: #333;">Presupuestos</h2>
+
+                <div class="card">
+                    <h3 style="margin-bottom: 15px; color: #667eea;">Nuevo Presupuesto</h3>
+                    <form id="presupuestoForm">
+                        <div class="grid grid-2">
+                            <div class="form-group">
+                                <label>Obra</label>
+                                <select id="presupuestoObra" required>
+                                    <option value="">Seleccionar obra...</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Concepto</label>
+                                <input type="text" id="presupuestoConcepto" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Importe (€)</label>
+                                <input type="number" step="0.01" id="presupuestoImporte" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Fecha</label>
+                                <input type="date" id="presupuestoFecha" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Descripción</label>
+                            <textarea id="presupuestoDescripcion" placeholder="Detalles del presupuesto..."></textarea>
+                        </div>
+                        <button type="submit" class="btn">Guardar Presupuesto</button>
+                    </form>
+                </div>
+
+                <div class="card">
+                    <h3 style="margin-bottom: 15px; color: #667eea;">Presupuestos Registrados</h3>
+                    <div id="listaPresupuestos">
+                        <p style="color: #666;">No hay presupuestos registrados</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Facturas -->
+            <div id="facturas" class="section">
+                <h2 style="margin-bottom: 20px; color: #333;">Facturas a Contratistas</h2>
+
+                <div class="card">
+                    <h3 style="margin-bottom: 15px; color: #667eea;">Nueva Factura</h3>
+                    <form id="facturaForm">
+                        <div class="grid grid-2">
+                            <div class="form-group">
+                                <label>Obra</label>
+                                <select id="facturaObra" required>
+                                    <option value="">Seleccionar obra...</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Contratista</label>
+                                <input type="text" id="facturaContratista" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Número de Factura</label>
+                                <input type="text" id="facturaNumero" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Importe (€)</label>
+                                <input type="number" step="0.01" id="facturaImporte" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Fecha de Factura</label>
+                                <input type="date" id="facturaFecha" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Estado</label>
+                                <select id="facturaEstado" required>
+                                    <option value="pendiente">Pendiente</option>
+                                    <option value="pagada">Pagada</option>
+                                    <option value="vencida">Vencida</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Concepto</label>
+                            <textarea id="facturaConcepto" placeholder="Concepto de la factura..."></textarea>
+                        </div>
+                        <button type="submit" class="btn">Registrar Factura</button>
+                    </form>
+                </div>
+
+                <div class="card">
+                    <h3 style="margin-bottom: 15px; color: #667eea;">Facturas Registradas</h3>
+                    <div id="listaFacturas">
+                        <p style="color: #666;">No hay facturas registradas</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gastos -->
+            <div id="gastos" class="section">
+                <h2 style="margin-bottom: 20px; color: #333;">Gastos de Material</h2>
+
+                <div class="card">
+                    <h3 style="margin-bottom: 15px; color: #667eea;">Nuevo Gasto</h3>
+                    <form id="gastoForm">
+                        <div class="grid grid-2">
+                            <div class="form-group">
+                                <label>Obra</label>
+                                <select id="gastoObra" required>
+                                    <option value="">Seleccionar obra...</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Proveedor</label>
+                                <input type="text" id="gastoProveedor" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Material/Concepto</label>
+                                <input type="text" id="gastoConcepto" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Importe (€)</label>
+                                <input type="number" step="0.01" id="gastoImporte" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Fecha</label>
+                                <input type="date" id="gastoFecha" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Categoría</label>
+                                <select id="gastoCategoria" required>
+                                    <option value="">Seleccionar categoría...</option>
+                                    <option value="cables">Cables</option>
+                                    <option value="enchufes">Enchufes e Interruptores</option>
+                                    <option value="cuadros">Cuadros Eléctricos</option>
+                                    <option value="iluminacion">Iluminación</option>
+                                    <option value="herramientas">Herramientas</option>
+                                    <option value="otros">Otros</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Descripción</label>
+                            <textarea id="gastoDescripcion" placeholder="Descripción del material o gasto..."></textarea>
+                        </div>
+                        <button type="submit" class="btn">Registrar Gasto</button>
+                    </form>
+                </div>
+
+                <div class="card">
+                    <h3 style="margin-bottom: 15px; color: #667eea;">Gastos Registrados</h3>
+                    <div id="listaGastos">
+                        <p style="color: #666;">No hay gastos registrados</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fotos -->
+            <div id="fotos" class="section">
+                <h2 style="margin-bottom: 20px; color: #333;">Galería de Fotos</h2>
+
+                <div class="card">
+                    <h3 style="margin-bottom: 15px; color: #667eea;">Subir Nueva Foto</h3>
+                    <form id="fotoForm">
+                        <div class="grid grid-2">
+                            <div class="form-group">
+                                <label>Obra</label>
+                                <select id="fotoObra" required>
+                                    <option value="">Seleccionar obra...</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Descripción</label>
+                                <input type="text" id="fotoDescripcion" placeholder="Describe la foto..." required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Seleccionar Foto</label>
+                            <div class="file-input-wrapper">
+                                <input type="file" id="fotoArchivo" accept="image/*" required>
+                                <span>Seleccionar Imagen</span>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn">Subir Foto</button>
+                    </form>
+                </div>
+
+                <div class="card">
+                    <h3 style="margin-bottom: 15px; color: #667eea;">Galería de Fotos</h3>
+                    <div id="galeriaFotos" class="gallery">
+                        <p style="color: #666;">No hay fotos registradas</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Archivos PDF -->
+            <div id="archivos" class="section">
+                <h2 style="margin-bottom: 20px; color: #333;">Archivos PDF</h2>
+
+                <div class="card">
+                    <h3 style="margin-bottom: 15px; color: #667eea;">Subir Nuevo Archivo</h3>
+                    <form id="archivoForm">
+                        <div class="grid grid-2">
+                            <div class="form-group">
+                                <label>Obra</label>
+                                <select id="archivoObra" required>
+                                    <option value="">Seleccionar obra...</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Tipo de Documento</label>
+                                <select id="archivoTipo" required>
+                                    <option value="">Seleccionar tipo...</option>
+                                    <option value="presupuesto_material">Presupuesto de Material</option>
+                                    <option value="catalogo">Catálogo de Productos</option>
+                                    <option value="factura">Factura</option>
+                                    <option value="certificado">Certificado</option>
+                                    <option value="planos">Planos</option>
+                                    <option value="otros">Otros</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Descripción</label>
+                            <input type="text" id="archivoDescripcion" placeholder="Describe el archivo..." required>
+                        </div>
+                        <div class="form-group">
+                            <label>Seleccionar Archivo PDF</label>
+                            <div class="file-input-wrapper">
+                                <input type="file" id="archivoArchivo" accept=".pdf" required>
+                                <span>Seleccionar PDF</span>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn">Subir Archivo</button>
+                    </form>
+                </div>
+
+                <div class="card">
+                    <h3 style="margin-bottom: 15px; color: #667eea;">Archivos Registrados</h3>
+                    <div id="listaArchivos">
+                        <p style="color: #666;">No hay archivos registrados</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para ver imágenes -->
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <div class="modal-content">
+            <img id="modalImage" src="" alt="">
+        </div>
+    </div>
+
+    <script>
+        // Datos persistentes con localStorage
+        let data = {
+            obras: [],
+            presupuestos: [],
+            facturas: [],
+            gastos: [],
+            fotos: [],
+            archivos: []
+        };
+
+        // Cargar datos del localStorage
+        function loadData() {
+            try {
+                const savedData = localStorage.getItem('llumRequenaData');
+                if (savedData) {
+                    data = JSON.parse(savedData);
+                }
+            } catch (error) {
+                console.log('Error loading data:', error);
+            }
+        }
+
+        // Guardar datos en localStorage
+        function saveData() {
+            try {
+                localStorage.setItem('llumRequenaData', JSON.stringify(data));
+            } catch (error) {
+                console.log('Error saving data:', error);
+            }
+        }
+
+        // Función para mostrar secciones
+        function showSection(sectionId) {
+            // Ocultar todas las secciones
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Mostrar la sección seleccionada
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Actualizar tabs
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        // Inicializar la aplicación
+        document.addEventListener('DOMContentLoaded', function() {
+            loadData(); // Cargar datos guardados
+            initializeForms();
+            updateDashboard();
+            updateSelectOptions();
+            updateObras();
+            updatePresupuestos();
+            updateFacturas();
+            updateGastos();
+            updateFotos();
+            updateArchivos();
+        });
+
+        // Inicializar formularios
+        function initializeForms() {
+            // Formulario de obras
+            document.getElementById('obraForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                addObra();
+            });
+
+            // Formulario de presupuestos
+            document.getElementById('presupuestoForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                addPresupuesto();
+            });
+
+            // Formulario de facturas
+            document.getElementById('facturaForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                addFactura();
+            });
+
+            // Formulario de gastos
+            document.getElementById('gastoForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                addGasto();
+            });
+
+            // Formulario de fotos
+            document.getElementById('fotoForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                addFoto();
+            });
+
+            // Formulario de archivos
+            document.getElementById('archivoForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                addArchivo();
+            });
+
+            // Modal de imágenes
+            document.querySelector('.close').addEventListener('click', function() {
+                document.getElementById('imageModal').style.display = 'none';
+            });
+        }
+
+        // Funciones para agregar datos
+        function addObra() {
+            const obra = {
+                id: Date.now(),
+                nombre: document.getElementById('obraNombre').value,
+                cliente: document.getElementById('obraCliente').value,
+                fechaInicio: document.getElementById('obraFechaInicio').value,
+                fechaFin: document.getElementById('obraFechaFin').value,
+                descripcion: document.getElementById('obraDescripcion').value
+            };
+            
+            data.obras.push(obra);
+            document.getElementById('obraForm').reset();
+            updateObras();
+            updateSelectOptions();
+            updateDashboard();
+        }
+
+        function addPresupuesto() {
+            const presupuesto = {
+                id: Date.now(),
+                obraId: document.getElementById('presupuestoObra').value,
+                concepto: document.getElementById('presupuestoConcepto').value,
+                importe: parseFloat(document.getElementById('presupuestoImporte').value),
+                fecha: document.getElementById('presupuestoFecha').value,
+                descripcion: document.getElementById('presupuestoDescripcion').value
+            };
+            
+            data.presupuestos.push(presupuesto);
+            document.getElementById('presupuestoForm').reset();
+            updatePresupuestos();
+            updateDashboard();
+        }
+
+        function addFactura() {
+            const factura = {
+                id: Date.now(),
+                obraId: document.getElementById('facturaObra').value,
+                contratista: document.getElementById('facturaContratista').value,
+                numero: document.getElementById('facturaNumero').value,
+                importe: parseFloat(document.getElementById('facturaImporte').value),
+                fecha: document.getElementById('facturaFecha').value,
+                estado: document.getElementById('facturaEstado').value,
+                concepto: document.getElementById('facturaConcepto').value
+            };
+            
+            data.facturas.push(factura);
+            document.getElementById('facturaForm').reset();
+            updateFacturas();
+            updateDashboard();
+        }
+
+        function addGasto() {
+            const gasto = {
+                id: Date.now(),
+                obraId: document.getElementById('gastoObra').value,
+                proveedor: document.getElementById('gastoProveedor').value,
+                concepto: document.getElementById('gastoConcepto').value,
+                importe: parseFloat(document.getElementById('gastoImporte').value),
+                fecha: document.getElementById('gastoFecha').value,
+                categoria: document.getElementById('gastoCategoria').value,
+                descripcion: document.getElementById('gastoDescripcion').value
+            };
+            
+            data.gastos.push(gasto);
+            document.getElementById('gastoForm').reset();
+            updateGastos();
+            updateDashboard();
+        }
+
+        function addFoto() {
+            const file = document.getElementById('fotoArchivo').files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const foto = {
+                        id: Date.now(),
+                        obraId: document.getElementById('fotoObra').value,
+                        descripcion: document.getElementById('fotoDescripcion').value,
+                        archivo: e.target.result,
+                        fecha: new Date().toISOString().split('T')[0]
+                    };
+                    
+                    data.fotos.push(foto);
+                    document.getElementById('fotoForm').reset();
+                    updateFotos();
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function addArchivo() {
+            const file = document.getElementById('archivoArchivo').files[0];
+            if (file) {
+                const archivo = {
+                    id: Date.now(),
+                    obraId: document.getElementById('archivoObra').value,
+                    tipo: document.getElementById('archivoTipo').value,
+                    descripcion: document.getElementById('archivoDescripcion').value,
+                    nombre: file.name,
+                    fecha: new Date().toISOString().split('T')[0]
+                };
+                
+                data.archivos.push(archivo);
+                document.getElementById('archivoForm').reset();
+                updateArchivos();
+                alert('Archivo registrado correctamente (funcionalidad completa disponible en producción)');
+            }
+        }
+
+        // Funciones para actualizar las listas
+        function updateObras() {
+            const container = document.getElementById('listaObras');
+            if (data.obras.length === 0) {
+                container.innerHTML = '<p style="color: #666;">No hay obras registradas</p>';
+                return;
+            }
+            
+            container.innerHTML = data.obras.map(obra => `
+                <div class="obra-item">
+                    <div class="item-header">
+                        <div class="item-title">${obra.nombre}</div>
+                        <button class="btn btn-danger" onclick="deleteItem('obras', ${obra.id})">Eliminar</button>
+                    </div>
+                    <p><strong>Cliente:</strong> ${obra.cliente}</p>
+                    <p><strong>Inicio:</strong> ${formatDate(obra.fechaInicio)}</p>
+                    ${obra.fechaFin ? `<p><strong>Fin estimado:</strong> ${formatDate(obra.fechaFin)}</p>` : ''}
+                    ${obra.descripcion ? `<p><strong>Descripción:</strong> ${obra.descripcion}</p>` : ''}
+                </div>
+            `).join('');
+        }
+
+        function updatePresupuestos() {
+            const container = document.getElementById('listaPresupuestos');
+            if (data.presupuestos.length === 0) {
+                container.innerHTML = '<p style="color: #666;">No hay presupuestos registrados</p>';
+                return;
+            }
+            
+            container.innerHTML = data.presupuestos.map(presupuesto => {
+                const obra = data.obras.find(o => o.id == presupuesto.obraId);
+                return `
+                    <div class="presupuesto-item">
+                        <div class="item-header">
+                            <div class="item-title">${presupuesto.concepto}</div>
+                            <div class="item-amount">${formatCurrency(presupuesto.importe)}</div>
+                        </div>
+                        <p><strong>Obra:</strong> ${obra ? obra.nombre : 'N/A'}</p>
+                        <p><strong>Fecha:</strong> ${formatDate(presupuesto.fecha)}</p>
+                        ${presupuesto.descripcion ? `<p><strong>Descripción:</strong> ${presupuesto.descripcion}</p>` : ''}
+                        <button class="btn btn-danger" onclick="deleteItem('presupuestos', ${presupuesto.id})">Eliminar</button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function updateFacturas() {
+            const container = document.getElementById('listaFacturas');
+            if (data.facturas.length === 0) {
+                container.innerHTML = '<p style="color: #666;">No hay facturas registradas</p>';
+                return;
+            }
+            
+            container.innerHTML = data.facturas.map(factura => {
+                const obra = data.obras.find(o => o.id == factura.obraId);
+                const estadoColor = factura.estado === 'pagada' ? '#28a745' : factura.estado === 'vencida' ? '#dc3545' : '#ffc107';
+                return `
+                    <div class="factura-item">
+                        <div class="item-header">
+                            <div class="item-title">Factura ${factura.numero}</div>
+                            <div class="item-amount">${formatCurrency(factura.importe)}</div>
+                        </div>
+                        <p><strong>Obra:</strong> ${obra ? obra.nombre : 'N/A'}</p>
+                        <p><strong>Contratista:</strong> ${factura.contratista}</p>
+                        <p><strong>Fecha:</strong> ${formatDate(factura.fecha)}</p>
+                        <p><strong>Estado:</strong> <span style="color: ${estadoColor}; font-weight: bold;">${factura.estado.toUpperCase()}</span></p>
+                        ${factura.concepto ? `<p><strong>Concepto:</strong> ${factura.concepto}</p>` : ''}
+                        <button class="btn btn-danger" onclick="deleteItem('facturas', ${factura.id})">Eliminar</button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function updateGastos() {
+            const container = document.getElementById('listaGastos');
+            if (data.gastos.length === 0) {
+                container.innerHTML = '<p style="color: #666;">No hay gastos registrados</p>';
+                return;
+            }
+            
+            container.innerHTML = data.gastos.map(gasto => {
+                const obra = data.obras.find(o => o.id == gasto.obraId);
+                return `
+                    <div class="gasto-item">
+                        <div class="item-header">
+                            <div class="item-title">${gasto.concepto}</div>
+                            <div class="item-amount">${formatCurrency(gasto.importe)}</div>
+                        </div>
+                        <p><strong>Obra:</strong> ${obra ? obra.nombre : 'N/A'}</p>
+                        <p><strong>Proveedor:</strong> ${gasto.proveedor}</p>
+                        <p><strong>Categoría:</strong> ${gasto.categoria}</p>
+                        <p><strong>Fecha:</strong> ${formatDate(gasto.fecha)}</p>
+                        ${gasto.descripcion ? `<p><strong>Descripción:</strong> ${gasto.descripcion}</p>` : ''}
+                        <button class="btn btn-danger" onclick="deleteItem('gastos', ${gasto.id})">Eliminar</button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function updateFotos() {
+            const container = document.getElementById('galeriaFotos');
+            if (data.fotos.length === 0) {
+                container.innerHTML = '<p style="color: #666;">No hay fotos registradas</p>';
+                return;
+            }
+            
+            container.innerHTML = data.fotos.map(foto => {
+                const obra = data.obras.find(o => o.id == foto.obraId);
+                return `
+                    <div class="foto-item">
+                        <img src="${foto.archivo}" alt="${foto.descripcion}" class="photo-preview" onclick="showImage('${foto.archivo}')">
+                        <p style="margin-top: 10px; font-weight: 500;">${foto.descripcion}</p>
+                        <p style="font-size: 0.9em; color: #666;">${obra ? obra.nombre : 'N/A'}</p>
+                        <p style="font-size: 0.8em; color: #999;">${formatDate(foto.fecha)}</p>
+                        <button class="btn btn-danger" style="margin-top: 10px;" onclick="deleteItem('fotos', ${foto.id})">Eliminar</button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function updateArchivos() {
+            const container = document.getElementById('listaArchivos');
+            if (data.archivos.length === 0) {
+                container.innerHTML = '<p style="color: #666;">No hay archivos registrados</p>';
+                return;
+            }
+            
+            container.innerHTML = data.archivos.map(archivo => {
+                const obra = data.obras.find(o => o.id == archivo.obraId);
+                return `
+                    <div class="pdf-item">
+                        <div class="item-header">
+                            <div class="item-title">📄 ${archivo.nombre}</div>
+                            <button class="btn btn-danger" onclick="deleteItem('archivos', ${archivo.id})">Eliminar</button>
+                        </div>
+                        <p><strong>Obra:</strong> ${obra ? obra.nombre : 'N/A'}</p>
+                        <p><strong>Tipo:</strong> ${archivo.tipo}</p>
+                        <p><strong>Descripción:</strong> ${archivo.descripcion}</p>
+                        <p><strong>Fecha:</strong> ${formatDate(archivo.fecha)}</p>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Actualizar opciones de select
+        function updateSelectOptions() {
+            const selects = ['presupuestoObra', 'facturaObra', 'gastoObra', 'fotoObra', 'archivoObra'];
+            selects.forEach(selectId => {
+                const select = document.getElementById(selectId);
+                const currentValue = select.value;
+                select.innerHTML = '<option value="">Seleccionar obra...</option>';
+                data.obras.forEach(obra => {
+                    const option = document.createElement('option');
+                    option.value = obra.id;
+                    option.textContent = obra.nombre;
+                    if (obra.id == currentValue) option.selected = true;
+                    select.appendChild(option);
+                });
+            });
+        }
+
+        // Actualizar dashboard
+        function updateDashboard() {
+            document.getElementById('totalObras').textContent = data.obras.length;
+            
+            const totalPresupuesto = data.presupuestos.reduce((sum, p) => sum + p.importe, 0);
+            document.getElementById('totalPresupuesto').textContent = formatCurrency(totalPresupuesto);
+            
+            const totalFacturado = data.facturas.reduce((sum, f) => sum + f.importe, 0);
+            document.getElementById('totalFacturado').textContent = formatCurrency(totalFacturado);
+            
+            const totalGastos = data.gastos.reduce((sum, g) => sum + g.importe, 0);
+            document.getElementById('totalGastos').textContent = formatCurrency(totalGastos);
+            
+            // Actualizar obras recientes
+            const obrasRecientes = data.obras.slice(-3).reverse();
+            const container = document.getElementById('obrasRecientes');
+            if (obrasRecientes.length === 0) {
+                container.innerHTML = '<p style="color: #666;">No hay obras registradas</p>';
+            } else {
+                container.innerHTML = obrasRecientes.map(obra => `
+                    <div style="padding: 10px; border-left: 3px solid #667eea; margin-bottom: 10px;">
+                        <strong>${obra.nombre}</strong> - ${obra.cliente}
+                        <br><small>Inicio: ${formatDate(obra.fechaInicio)}</small>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // Función para eliminar elementos
+        function deleteItem(type, id) {
+            if (confirm('¿Estás seguro de que quieres eliminar este elemento?')) {
+                data[type] = data[type].filter(item => item.id !== id);
+                
+                switch(type) {
+                    case 'obras':
+                        updateObras();
+                        updateSelectOptions();
+                        break;
+                    case 'presupuestos':
+                        updatePresupuestos();
+                        break;
+                    case 'facturas':
+                        updateFacturas();
+                        break;
+                    case 'gastos':
+                        updateGastos();
+                        break;
+                    case 'fotos':
+                        updateFotos();
+                        break;
+                    case 'archivos':
+                        updateArchivos();
+                        break;
+                }
+                updateDashboard();
+            }
+        }
+
+        // Función para mostrar imagen en modal
+        function showImage(src) {
+            document.getElementById('modalImage').src = src;
+            document.getElementById('imageModal').style.display = 'block';
+        }
+
+        // Funciones de utilidad
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('es-ES');
+        }
+
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('es-ES', {
+                style: 'currency',
+                currency: 'EUR'
+            }).format(amount);
+        }
+
+        // Establecer fecha de hoy por defecto
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date().toISOString().split('T')[0];
+            const dateInputs = ['presupuestoFecha', 'facturaFecha', 'gastoFecha'];
+            dateInputs.forEach(inputId => {
+                document.getElementById(inputId).value = today;
+            });
+        });
+    </script>
+</body>
+</html>
