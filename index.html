@@ -17,7 +17,7 @@
 
         body {
             font-family: 'Lexend', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 50%, #ff8c42 100%);
             min-height: 100vh;
             color: #333;
         }
@@ -47,9 +47,10 @@
         }
 
         .logo h1 {
-            color: #667eea;
+            color: #ff4500;
             font-size: 2.5em;
             font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
 
         .logo-icon {
@@ -71,7 +72,7 @@
         }
 
         .nav-tab {
-            background: linear-gradient(45deg, #667eea, #764ba2);
+            background: linear-gradient(45deg, #ff6b35, #ff4500);
             color: white;
             border: none;
             padding: 12px 24px;
@@ -80,17 +81,19 @@
             font-family: 'Lexend', sans-serif;
             font-weight: 500;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
         }
 
         .nav-tab:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+            background: linear-gradient(45deg, #ff8c42, #ff6b35);
         }
 
         .nav-tab.active {
-            background: linear-gradient(45deg, #764ba2, #667eea);
+            background: linear-gradient(45deg, #ff4500, #e55100);
             transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 69, 0, 0.5);
         }
 
         .content {
@@ -116,7 +119,7 @@
             padding: 20px;
             margin-bottom: 20px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            border-left: 4px solid #667eea;
+            border-left: 4px solid #ff6b35;
         }
 
         .form-group {
@@ -142,7 +145,8 @@
 
         input:focus, select:focus, textarea:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #ff6b35;
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
         }
 
         textarea {
@@ -151,7 +155,7 @@
         }
 
         .btn {
-            background: linear-gradient(45deg, #667eea, #764ba2);
+            background: linear-gradient(45deg, #ff6b35, #ff4500);
             color: white;
             border: none;
             padding: 12px 24px;
@@ -162,11 +166,13 @@
             transition: all 0.3s ease;
             margin-right: 10px;
             margin-bottom: 10px;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.2);
         }
 
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.3);
+            background: linear-gradient(45deg, #ff8c42, #ff6b35);
         }
 
         .btn-secondary {
@@ -199,12 +205,12 @@
         }
 
         .stat-card {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, #ff6b35, #ff4500);
             color: white;
             padding: 20px;
             border-radius: 15px;
             text-align: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
         }
 
         .stat-number {
@@ -223,7 +229,7 @@
             padding: 15px;
             border-radius: 10px;
             margin-bottom: 15px;
-            border-left: 4px solid #667eea;
+            border-left: 4px solid #ff6b35;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
@@ -241,7 +247,7 @@
 
         .item-amount {
             font-weight: 600;
-            color: #667eea;
+            color: #ff4500;
             font-size: 1.1em;
         }
 
@@ -308,16 +314,31 @@
             position: relative;
             display: inline-block;
             cursor: pointer;
-            background: linear-gradient(45deg, #667eea, #764ba2);
+            background: linear-gradient(45deg, #ff6b35, #ff4500);
             color: white;
             padding: 12px 24px;
             border-radius: 10px;
             transition: all 0.3s ease;
+            border: 2px solid transparent;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.2);
         }
 
         .file-input-wrapper:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.3);
+            border-color: #ff8c42;
+            background: linear-gradient(45deg, #ff8c42, #ff6b35);
+        }
+
+        .file-input-wrapper.error {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
         }
 
         .file-input-wrapper input[type=file] {
@@ -384,7 +405,7 @@
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(45deg, #667eea, #764ba2);
+            background: linear-gradient(45deg, #ff6b35, #ff4500);
             border-radius: 10px;
             transition: width 0.3s ease;
         }
@@ -416,7 +437,27 @@
                 <h2 style="margin-bottom: 20px; color: #333;">Panel de Control</h2>
                 
                 <div class="alert alert-info">
-                    <strong>Nota:</strong> Los datos se almacenan temporalmente. Para uso en producción, guarda este código en tu dispositivo donde tendrás almacenamiento persistente.
+                    <strong>✅ Almacenamiento Persistente Activado:</strong> Los datos se guardan automáticamente en tu dispositivo y permanecerán disponibles cuando vuelvas a abrir la aplicación.
+                    <br><br>
+                    <strong>🔧 Estado del Sistema:</strong>
+                    <div id="systemStatus" style="margin-top: 10px; padding: 10px; background: rgba(255,255,255,0.5); border-radius: 5px;">
+                        Verificando compatibilidad...
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 style="margin-bottom: 15px; color: #667eea;">Gestión de Datos</h3>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <button class="btn" onclick="exportData()">📥 Exportar Datos</button>
+                        <button class="btn btn-secondary" onclick="importData()">📤 Importar Datos</button>
+                        <button class="btn btn-danger" onclick="clearAllData()">🗑️ Limpiar Todos los Datos</button>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px;">
+                        <button class="btn btn-secondary" onclick="testFileUpload()">🧪 Probar Subida de Archivos</button>
+                        <button class="btn btn-secondary" onclick="testLocalStorage()">💾 Probar Almacenamiento</button>
+                    </div>
+                    <input type="file" id="importFile" accept=".json" style="display: none;" onchange="handleImport(event)">
+                    <input type="file" id="testFile" accept="*" style="display: none;" onchange="handleTestFile(event)">
                 </div>
 
                 <div class="stats">
@@ -451,7 +492,7 @@
                 <h2 style="margin-bottom: 20px; color: #333;">Gestión de Obras</h2>
 
                 <div class="card">
-                    <h3 style="margin-bottom: 15px; color: #667eea;">Nueva Obra</h3>
+                    <h3 style="margin-bottom: 15px; color: #ff4500;">Nueva Obra</h3>
                     <form id="obraForm">
                         <div class="grid grid-2">
                             <div class="form-group">
@@ -480,7 +521,7 @@
                 </div>
 
                 <div class="card">
-                    <h3 style="margin-bottom: 15px; color: #667eea;">Obras Registradas</h3>
+                    <h3 style="margin-bottom: 15px; color: #ff4500;">Obras Registradas</h3>
                     <div id="listaObras">
                         <p style="color: #666;">No hay obras registradas</p>
                     </div>
@@ -492,7 +533,7 @@
                 <h2 style="margin-bottom: 20px; color: #333;">Presupuestos</h2>
 
                 <div class="card">
-                    <h3 style="margin-bottom: 15px; color: #667eea;">Nuevo Presupuesto</h3>
+                    <h3 style="margin-bottom: 15px; color: #ff4500;">Nuevo Presupuesto</h3>
                     <form id="presupuestoForm">
                         <div class="grid grid-2">
                             <div class="form-group">
@@ -523,7 +564,7 @@
                 </div>
 
                 <div class="card">
-                    <h3 style="margin-bottom: 15px; color: #667eea;">Presupuestos Registrados</h3>
+                    <h3 style="margin-bottom: 15px; color: #ff4500;">Presupuestos Registrados</h3>
                     <div id="listaPresupuestos">
                         <p style="color: #666;">No hay presupuestos registrados</p>
                     </div>
@@ -793,6 +834,7 @@
 
         // Inicializar la aplicación
         document.addEventListener('DOMContentLoaded', function() {
+            checkSystemCompatibility(); // Verificar compatibilidad
             loadData(); // Cargar datos guardados
             initializeForms();
             updateDashboard();
@@ -804,6 +846,48 @@
             updateFotos();
             updateArchivos();
         });
+
+        // Verificar compatibilidad del sistema
+        function checkSystemCompatibility() {
+            const statusDiv = document.getElementById('systemStatus');
+            let status = [];
+            
+            // Verificar localStorage
+            try {
+                localStorage.setItem('test', 'test');
+                localStorage.removeItem('test');
+                status.push('✅ LocalStorage: Funcional');
+            } catch (e) {
+                status.push('❌ LocalStorage: No disponible - Los datos no se guardarán');
+            }
+            
+            // Verificar File API
+            if (window.File && window.FileReader && window.FileList && window.Blob) {
+                status.push('✅ Subida de Archivos: Compatible');
+            } else {
+                status.push('❌ Subida de Archivos: No compatible con este navegador');
+            }
+            
+            // Verificar protocolo
+            if (location.protocol === 'file:') {
+                status.push('⚠️ Protocolo: Archivo local (puede tener limitaciones)');
+                status.push('💡 Recomendación: Usa un servidor local o Firefox para mejor funcionamiento');
+            } else {
+                status.push('✅ Protocolo: HTTP/HTTPS (óptimo)');
+            }
+            
+            // Verificar navegador
+            const isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+            const isFirefox = /Firefox/.test(navigator.userAgent);
+            
+            if (isChrome && location.protocol === 'file:') {
+                status.push('⚠️ Chrome + Archivo Local: Puede requerir permisos especiales');
+            } else if (isFirefox) {
+                status.push('✅ Firefox: Excelente compatibilidad para archivos locales');
+            }
+            
+            statusDiv.innerHTML = status.join('<br>');
+        }
 
         // Inicializar formularios
         function initializeForms() {
@@ -847,6 +931,31 @@
             document.querySelector('.close').addEventListener('click', function() {
                 document.getElementById('imageModal').style.display = 'none';
             });
+
+            // Mejorar feedback de inputs de archivo
+            document.getElementById('fotoArchivo').addEventListener('change', function(e) {
+                const wrapper = e.target.parentElement;
+                const span = wrapper.querySelector('span');
+                if (e.target.files.length > 0) {
+                    span.textContent = `📷 ${e.target.files[0].name}`;
+                    wrapper.style.background = 'linear-gradient(45deg, #28a745, #20c997)';
+                } else {
+                    span.textContent = 'Seleccionar Imagen';
+                    wrapper.style.background = 'linear-gradient(45deg, #667eea, #764ba2)';
+                }
+            });
+
+            document.getElementById('archivoArchivo').addEventListener('change', function(e) {
+                const wrapper = e.target.parentElement;
+                const span = wrapper.querySelector('span');
+                if (e.target.files.length > 0) {
+                    span.textContent = `📄 ${e.target.files[0].name}`;
+                    wrapper.style.background = 'linear-gradient(45deg, #28a745, #20c997)';
+                } else {
+                    span.textContent = 'Seleccionar PDF';
+                    wrapper.style.background = 'linear-gradient(45deg, #667eea, #764ba2)';
+                }
+            });
         }
 
         // Funciones para agregar datos
@@ -861,6 +970,7 @@
             };
             
             data.obras.push(obra);
+            saveData(); // Guardar en localStorage
             document.getElementById('obraForm').reset();
             updateObras();
             updateSelectOptions();
@@ -878,6 +988,7 @@
             };
             
             data.presupuestos.push(presupuesto);
+            saveData(); // Guardar en localStorage
             document.getElementById('presupuestoForm').reset();
             updatePresupuestos();
             updateDashboard();
@@ -896,6 +1007,7 @@
             };
             
             data.facturas.push(factura);
+            saveData(); // Guardar en localStorage
             document.getElementById('facturaForm').reset();
             updateFacturas();
             updateDashboard();
@@ -914,48 +1026,103 @@
             };
             
             data.gastos.push(gasto);
+            saveData(); // Guardar en localStorage
             document.getElementById('gastoForm').reset();
             updateGastos();
             updateDashboard();
         }
 
         function addFoto() {
-            const file = document.getElementById('fotoArchivo').files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
+            const fileInput = document.getElementById('fotoArchivo');
+            const file = fileInput.files[0];
+            
+            if (!file) {
+                alert('Por favor selecciona una imagen');
+                return;
+            }
+
+            // Verificar tamaño del archivo (máximo 5MB)
+            if (file.size > 5 * 1024 * 1024) {
+                alert('La imagen es demasiado grande. Máximo 5MB permitido.');
+                return;
+            }
+
+            // Verificar tipo de archivo
+            if (!file.type.startsWith('image/')) {
+                alert('Por favor selecciona un archivo de imagen válido');
+                return;
+            }
+
+            const reader = new FileReader();
+            
+            reader.onerror = function() {
+                alert('Error al leer el archivo. Inténtalo de nuevo.');
+            };
+            
+            reader.onload = function(e) {
+                try {
                     const foto = {
                         id: Date.now(),
                         obraId: document.getElementById('fotoObra').value,
                         descripcion: document.getElementById('fotoDescripcion').value,
                         archivo: e.target.result,
-                        fecha: new Date().toISOString().split('T')[0]
+                        fecha: new Date().toISOString().split('T')[0],
+                        nombre: file.name,
+                        tamaño: file.size
                     };
                     
                     data.fotos.push(foto);
+                    saveData(); // Guardar en localStorage
                     document.getElementById('fotoForm').reset();
                     updateFotos();
-                };
-                reader.readAsDataURL(file);
-            }
+                    alert('Foto subida correctamente');
+                } catch (error) {
+                    alert('Error al guardar la foto: ' + error.message);
+                }
+            };
+            
+            reader.readAsDataURL(file);
         }
 
         function addArchivo() {
-            const file = document.getElementById('archivoArchivo').files[0];
-            if (file) {
+            const fileInput = document.getElementById('archivoArchivo');
+            const file = fileInput.files[0];
+            
+            if (!file) {
+                alert('Por favor selecciona un archivo PDF');
+                return;
+            }
+
+            // Verificar que sea PDF
+            if (file.type !== 'application/pdf') {
+                alert('Por favor selecciona solo archivos PDF');
+                return;
+            }
+
+            // Verificar tamaño del archivo (máximo 10MB)
+            if (file.size > 10 * 1024 * 1024) {
+                alert('El archivo PDF es demasiado grande. Máximo 10MB permitido.');
+                return;
+            }
+
+            try {
                 const archivo = {
                     id: Date.now(),
                     obraId: document.getElementById('archivoObra').value,
                     tipo: document.getElementById('archivoTipo').value,
                     descripcion: document.getElementById('archivoDescripcion').value,
                     nombre: file.name,
+                    tamaño: file.size,
                     fecha: new Date().toISOString().split('T')[0]
                 };
                 
                 data.archivos.push(archivo);
+                saveData(); // Guardar en localStorage
                 document.getElementById('archivoForm').reset();
                 updateArchivos();
-                alert('Archivo registrado correctamente (funcionalidad completa disponible en producción)');
+                alert('Archivo PDF registrado correctamente');
+            } catch (error) {
+                alert('Error al guardar el archivo: ' + error.message);
             }
         }
 
@@ -1152,6 +1319,7 @@
         function deleteItem(type, id) {
             if (confirm('¿Estás seguro de que quieres eliminar este elemento?')) {
                 data[type] = data[type].filter(item => item.id !== id);
+                saveData(); // Guardar cambios en localStorage
                 
                 switch(type) {
                     case 'obras':
@@ -1195,6 +1363,121 @@
                 style: 'currency',
                 currency: 'EUR'
             }).format(amount);
+        }
+
+        // Funciones de gestión de datos
+        function exportData() {
+            try {
+                const dataStr = JSON.stringify(data, null, 2);
+                const dataBlob = new Blob([dataStr], { type: 'application/json' });
+                const url = URL.createObjectURL(dataBlob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `llum-requena-backup-${new Date().toISOString().split('T')[0]}.json`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+                alert('Datos exportados correctamente');
+            } catch (error) {
+                alert('Error al exportar datos: ' + error.message);
+            }
+        }
+
+        function importData() {
+            document.getElementById('importFile').click();
+        }
+
+        function handleImport(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    try {
+                        const importedData = JSON.parse(e.target.result);
+                        if (confirm('¿Estás seguro de que quieres importar estos datos? Esto sobrescribirá todos los datos actuales.')) {
+                            data = importedData;
+                            saveData();
+                            
+                            // Actualizar todas las vistas
+                            updateDashboard();
+                            updateSelectOptions();
+                            updateObras();
+                            updatePresupuestos();
+                            updateFacturas();
+                            updateGastos();
+                            updateFotos();
+                            updateArchivos();
+                            
+                            alert('Datos importados correctamente');
+                        }
+                    } catch (error) {
+                        alert('Error al importar datos: Archivo no válido');
+                    }
+                };
+                reader.readAsText(file);
+            }
+        }
+
+        function clearAllData() {
+            if (confirm('⚠️ ADVERTENCIA: Esto eliminará TODOS los datos de forma permanente. ¿Estás completamente seguro?')) {
+                if (confirm('Esta acción NO se puede deshacer. ¿Confirmas que quieres eliminar todos los datos?')) {
+                    data = {
+                        obras: [],
+                        presupuestos: [],
+                        facturas: [],
+                        gastos: [],
+                        fotos: [],
+                        archivos: []
+                    };
+                    saveData();
+                    
+                    // Actualizar todas las vistas
+                    updateDashboard();
+                    updateSelectOptions();
+                    updateObras();
+                    updatePresupuestos();
+                    updateFacturas();
+                    updateGastos();
+                    updateFotos();
+                    updateArchivos();
+                    
+                    alert('Todos los datos han sido eliminados');
+                }
+            }
+        }
+
+        // Funciones de diagnóstico
+        function testFileUpload() {
+            document.getElementById('testFile').click();
+        }
+
+        function handleTestFile(event) {
+            const file = event.target.files[0];
+            if (file) {
+                alert(`✅ ¡Archivo seleccionado correctamente!\n\nNombre: ${file.name}\nTamaño: ${(file.size / 1024).toFixed(2)} KB\nTipo: ${file.type}\n\nLa subida de archivos funciona en tu navegador.`);
+                event.target.value = ''; // Limpiar selección
+            } else {
+                alert('❌ No se pudo seleccionar el archivo');
+            }
+        }
+
+        function testLocalStorage() {
+            try {
+                const testData = { test: 'Prueba de almacenamiento', timestamp: new Date().toISOString() };
+                localStorage.setItem('llumRequenaTest', JSON.stringify(testData));
+                const retrieved = localStorage.getItem('llumRequenaTest');
+                
+                if (retrieved) {
+                    const parsed = JSON.parse(retrieved);
+                    alert(`✅ ¡LocalStorage funciona correctamente!\n\nDatos guardados: ${parsed.test}\nFecha: ${parsed.timestamp}`);
+                    localStorage.removeItem('llumRequenaTest');
+                } else {
+                    alert('❌ Error: No se pudieron recuperar los datos guardados');
+                }
+            } catch (error) {
+                alert(`❌ Error en LocalStorage: ${error.message}\n\nPosibles soluciones:\n1. Usa Firefox en lugar de Chrome\n2. Abre Chrome con permisos especiales\n3. Usa un servidor local`);
+            }
         }
 
         // Establecer fecha de hoy por defecto
